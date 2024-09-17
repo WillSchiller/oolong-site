@@ -38,15 +38,19 @@ export default function OoLongHero() {
           <JapaneseInspiredElement />
         </motion.h1>
         <motion.p 
-          className="mt-6 text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] xl:text-[4rem] text-white font-mono max-w-6xl text-center"
+          className="mt-6 text-[5vw] sm:text-[4vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[2vw] text-white font-mono max-w-6xl text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          {typedText}<span className="animate-pulse">|</span>
+          5x <span className="relative inline-block px-1 mx-1">
+            <span className="absolute inset-0 bg-gradient-to-b from-[#4EC9B0] to-[#3EACB4] opacity-30 transform skew-x-12"></span>
+            <span className="relative z-10">long</span>
+          </span> your Uniswap positions
+          <span className="animate-pulse">|</span>
         </motion.p>
       </div>
-      <BladeRunnerOverlay />
+
     </section>
   )
 }
@@ -193,27 +197,5 @@ function JapaneseInspiredElement() {
         </g>
       </svg>
     </motion.div>
-  )
-}
-
-function BladeRunnerOverlay() {
-  return (
-    <div className="absolute inset-0 z-20 pointer-events-none">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0b1e40] to-[#0a0b1e80]" />
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-r from-[#C586C020] to-[#4EC9B020]"
-        animate={{
-          opacity: [0.1, 0.3, 0.1],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-[#0a0b1e] to-transparent" />
-      <div className="absolute inset-0 bg-[url('/blade-runner-overlay.png')] opacity-30 mix-blend-overlay" />
-      <div className="scanline" />
-    </div>
   )
 }
