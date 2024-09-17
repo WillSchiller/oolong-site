@@ -7,7 +7,7 @@ export default function OoLongHero() {
   // Removed typedText and fullText since they are unused
 
   return (
-    <section className="relative bg-[#0a0b1e] min-h-screen flex flex-col items-center justify-start md:justify-center overflow-hidden font-sans">
+    <section className="relative bg-[#0a0b1e] min-h-screen flex flex-col items-center justify-start md:justify-center overflow-hidden font-sans pt-24 sm:pt-32 md:pt-16">
       <div className="absolute inset-0 z-0">
         <AnimeTradeVisualization />
       </div>

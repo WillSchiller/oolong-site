@@ -11,9 +11,9 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <nav className="bg-transparent fixed w-full z-10">
+    <nav className="bg-black bg-opacity-30 backdrop-blur-md fixed w-full z-50 shadow-lg border-b border-white border-opacity-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <SakuraLogo />
@@ -23,12 +23,12 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center space-x-4">
             <Link
               href="/docs"
-              className="text-white hover:text-gray-200 transition duration-300 ease-in-out font-medium px-4 py-2 rounded-md border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
+              className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium px-4 py-2 rounded-md border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
             >
               Docs
             </Link>
             <button
-              className="bg-white text-black font-bold py-2 px-6 rounded-md hover:bg-gray-100 transition duration-300 ease-in-out connect-button"
+              className="bg-white text-black font-bold py-2 px-6 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button"
               onClick={() => console.log('Connect clicked')}
             >
               Connect
@@ -37,7 +37,7 @@ export default function Navbar() {
           <div className="flex sm:hidden">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
@@ -53,30 +53,39 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="sm:hidden"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-50 sm:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-black bg-opacity-80 backdrop-blur-md">
-              <Link
-                href="/docs"
-                className="text-white hover:text-gray-200 block px-3 py-2 rounded-md text-base font-medium border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
-                onClick={toggleMenu}
-              >
-                Docs
-              </Link>
-              <button
-                className="w-full text-left bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-gray-100 transition duration-300 ease-in-out connect-button"
-                onClick={() => {
-                  console.log('Connect clicked')
-                  toggleMenu()
-                }}
-              >
-                Connect
-              </button>
-            </div>
+            <div className="absolute inset-0 bg-black opacity-50" onClick={toggleMenu}></div>
+            <motion.div
+              className="absolute right-0 top-0 bottom-0 w-64 bg-black bg-opacity-90 backdrop-blur-md border-l border-white border-opacity-20 shadow-2xl"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="p-5 space-y-4">
+                <Link
+                  href="/docs"
+                  className="block text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium px-4 py-2 rounded-md border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
+                  onClick={toggleMenu}
+                >
+                  Docs
+                </Link>
+                <button
+                  className="w-full text-center bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button"
+                  onClick={() => {
+                    console.log('Connect clicked')
+                    toggleMenu()
+                  }}
+                >
+                  Connect
+                </button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -92,7 +101,7 @@ export default function Navbar() {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(0, 0, 0, 0.1);
           transform: scale(0);
           transition: transform 0.3s ease-out;
           border-radius: inherit;
@@ -107,7 +116,7 @@ export default function Navbar() {
 
 function SakuraLogo() {
   return (
-    <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#sakuraGlow)">
         <path d="M30 5L35 20L50 25L35 30L30 45L25 30L10 25L25 20L30 5Z" stroke="white" strokeWidth="2.5" fill="none" />
         <circle cx="30" cy="25" r="5" fill="white" opacity="0.7" />
