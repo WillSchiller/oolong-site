@@ -23,7 +23,7 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center space-x-4">
             <Link
               href="/docs"
-              className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium"
+              className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium px-4 py-2 rounded-md border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
             >
               Docs
             </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
             <div className="flex flex-col items-center justify-center flex-grow space-y-8 p-4">
               <Link
                 href="/docs"
-                className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium text-2xl"
+                className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium text-2xl px-6 py-3 rounded-md border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
                 onClick={toggleMenu}
               >
                 Docs
