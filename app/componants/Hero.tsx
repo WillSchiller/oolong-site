@@ -4,22 +4,7 @@ import { motion, useAnimation } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
 
 export default function OoLongHero() {
-  const [typedText, setTypedText] = useState('')
-  const fullText = "Margin Trading DApp built on Uniswap"
-
-  useEffect(() => {
-    let i = 0
-    const typingInterval = setInterval(() => {
-      if (i < fullText.length) {
-        setTypedText(fullText.slice(0, i + 1))
-        i++
-      } else {
-        clearInterval(typingInterval)
-      }
-    }, 100)
-
-    return () => clearInterval(typingInterval)
-  }, [])
+  // Removed typedText and fullText since they are unused
 
   return (
     <section className="relative bg-[#0a0b1e] min-h-screen flex flex-col items-center justify-start md:justify-center overflow-hidden font-sans">
@@ -50,7 +35,6 @@ export default function OoLongHero() {
           <span className="animate-pulse">|</span>
         </motion.p>
       </div>
-
     </section>
   )
 }
