@@ -22,23 +22,23 @@ export default function OoLongHero() {
   }, [])
 
   return (
-    <section className="relative bg-[#0a0b1e] min-h-screen flex flex-col items-center justify-start md:justify-center overflow-hidden">
+    <section className="relative bg-[#0a0b1e] min-h-screen flex flex-col items-center justify-start md:justify-center overflow-hidden font-sans">
       <div className="absolute inset-0 z-0">
         <AnimeTradeVisualization />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-start md:justify-center z-10 pt-16 md:pt-0">
         <motion.h1 
-          className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-bold tracking-tight mb-4 text-center relative flex items-center"
+          className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[8rem] xl:text-[9rem] 2xl:text-[11rem] font-extrabold tracking-tight mb-4 text-center relative flex flex-wrap justify-center items-center leading-none"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          <span className="relative z-10 text-white">oo</span>
-          <span className="relative z-10 inline-block bg-gradient-to-r from-[#4EC9B0] to-[#3EACB4] text-transparent bg-clip-text">LONG</span>
+          <span className="relative z-10 text-white inline-block pb-2">Oo</span>
+          <span className="relative z-10 inline-block bg-gradient-to-r from-[#4EC9B0] via-[#3EACB4] to-[#4EC9B0] text-transparent bg-clip-text bg-300% animate-gradient pb-2">Long</span>
           <JapaneseInspiredElement />
         </motion.h1>
         <motion.p 
-          className="mt-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#C586C0] font-mono max-w-4xl text-center"
+          className="mt-6 text-[2rem] sm:text-[2.5rem] md:text-[3rem] lg:text-[3.5rem] xl:text-[4rem] text-white font-mono max-w-6xl text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
@@ -176,10 +176,6 @@ function JapaneseInspiredElement() {
     >
       <svg width="0.8em" height="0.8em" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="sakuraGradient" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#4EC9B0" />
-            <stop offset="1" stopColor="#3EACB4" />
-          </linearGradient>
           <filter id="sakuraGlow">
             <feGaussianBlur stdDeviation="1" result="coloredBlur" />
             <feMerge>
@@ -191,9 +187,9 @@ function JapaneseInspiredElement() {
         
         {/* Stylized Cherry Blossom (Sakura) */}
         <g filter="url(#sakuraGlow)">
-          <path d="M30 5L35 20L50 25L35 30L30 45L25 30L10 25L25 20L30 5Z" stroke="url(#sakuraGradient)" strokeWidth="2" fill="none" />
-          <circle cx="30" cy="25" r="5" fill="url(#sakuraGradient)" opacity="0.6" />
-          <path d="M30 15L32 20L37 22L32 24L30 29L28 24L23 22L28 20L30 15Z" fill="url(#sakuraGradient)" opacity="0.4" />
+          <path d="M30 5L35 20L50 25L35 30L30 45L25 30L10 25L25 20L30 5Z" stroke="white" strokeWidth="2" fill="none" />
+          <circle cx="30" cy="25" r="5" fill="white" opacity="0.6" />
+          <path d="M30 15L32 20L37 22L32 24L30 29L28 24L23 22L28 20L30 15Z" fill="white" opacity="0.4" />
         </g>
       </svg>
     </motion.div>
