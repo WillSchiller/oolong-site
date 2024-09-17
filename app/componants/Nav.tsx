@@ -11,7 +11,7 @@ export default function Navbar() {
   const toggleMenu = () => setIsOpen(!isOpen)
 
   return (
-    <nav className="bg-black bg-opacity-30 backdrop-blur-md fixed w-full z-50 shadow-lg border-b border-white border-opacity-10">
+    <nav className="bg-black bg-opacity-30 backdrop-blur-md fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -23,7 +23,7 @@ export default function Navbar() {
           <div className="hidden sm:flex items-center space-x-4">
             <Link
               href="/docs"
-              className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium px-4 py-2 rounded-md border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
+              className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium"
             >
               Docs
             </Link>
@@ -53,39 +53,39 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-50 sm:hidden"
+            className="fixed inset-0 z-50 sm:hidden bg-black bg-opacity-30 backdrop-blur-md flex flex-col"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="absolute inset-0 bg-black opacity-50" onClick={toggleMenu}></div>
-            <motion.div
-              className="absolute right-0 top-0 bottom-0 w-64 bg-black bg-opacity-90 backdrop-blur-md border-l border-white border-opacity-20 shadow-2xl"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="p-5 space-y-4">
-                <Link
-                  href="/docs"
-                  className="block text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium px-4 py-2 rounded-md border border-white border-opacity-30 hover:bg-white hover:bg-opacity-10"
-                  onClick={toggleMenu}
-                >
-                  Docs
-                </Link>
-                <button
-                  className="w-full text-center bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button"
-                  onClick={() => {
-                    console.log('Connect clicked')
-                    toggleMenu()
-                  }}
-                >
-                  Connect
-                </button>
-              </div>
-            </motion.div>
+            <div className="flex justify-end p-4">
+              <button
+                onClick={toggleMenu}
+                className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              >
+                <span className="sr-only">Close main menu</span>
+                <X className="block h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+            <div className="flex flex-col items-center justify-center flex-grow space-y-8 p-4">
+              <Link
+                href="/docs"
+                className="text-white hover:text-gray-300 transition duration-300 ease-in-out font-medium text-2xl"
+                onClick={toggleMenu}
+              >
+                Docs
+              </Link>
+              <button
+                className="bg-white text-black font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button text-xl"
+                onClick={() => {
+                  console.log('Connect clicked')
+                  toggleMenu()
+                }}
+              >
+                Connect
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
