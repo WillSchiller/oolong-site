@@ -4,19 +4,24 @@ import { motion, useAnimation } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
 
 export default function OoLongHero() {
-  // Removed typedText and fullText since they are unused
+  const [showCandlesticks, setShowCandlesticks] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowCandlesticks(true), 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <section className="relative bg-[#0a0b1e] min-h-screen flex flex-col items-center justify-start md:justify-center overflow-hidden font-sans pt-24 sm:pt-32 md:pt-16">
       <div className="absolute inset-0 z-0">
-        <AnimeTradeVisualization />
+        <AnimeTradeVisualization showCandlesticks={showCandlesticks} />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-start md:justify-center z-10 pt-16 md:pt-0">
         <motion.h1 
           className="text-[5rem] sm:text-[6rem] md:text-[7rem] lg:text-[8rem] xl:text-[9rem] 2xl:text-[11rem] font-extrabold tracking-tight mb-4 text-center relative flex flex-wrap justify-center items-center leading-none"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 0.2 }}
         >
           <span className="relative z-10 text-white inline-block pb-2">Oo</span>
           <span className="relative z-10 inline-block bg-gradient-to-r from-[#4EC9B0] via-[#3EACB4] to-[#4EC9B0] text-transparent bg-clip-text bg-300% animate-gradient pb-2">Long</span>
@@ -26,20 +31,19 @@ export default function OoLongHero() {
           className="mt-6 text-[5vw] sm:text-[4vw] md:text-[3vw] lg:text-[2.5vw] xl:text-[2vw] text-white font-mono max-w-6xl text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
         >
           5x <span className="relative inline-block px-1 mx-1">
             <span className="absolute inset-0 bg-gradient-to-b from-[#4EC9B0] to-[#3EACB4] opacity-30 transform skew-x-12"></span>
             <span className="relative z-10">long</span>
           </span> your Uniswap positions
-          <span className="animate-pulse">|</span>
         </motion.p>
       </div>
     </section>
   )
 }
 
-function AnimeTradeVisualization() {
+function AnimeTradeVisualization({ showCandlesticks }: { showCandlesticks: boolean }) {
   const [particles, setParticles] = useState(() => generateParticles())
   const [candlesticks, setCandlesticks] = useState(() => generateCandlesticks())
   const controls = useAnimation()
@@ -72,18 +76,21 @@ function AnimeTradeVisualization() {
   }, [updateVisualization])
 
   useEffect(() => {
-    controls.start(i => ({
-      scaleY: [candlesticks[i].open / 100, candlesticks[i].close / 100],
-      y: [100 - candlesticks[i].open, 100 - candlesticks[i].close],
-      transition: { duration: 1, ease: "easeInOut" }
-    }))
-  }, [candlesticks, controls])
+    if (showCandlesticks) {
+      controls.start(i => ({
+        scaleY: [0, candlesticks[i].open / 100, candlesticks[i].close / 100],
+        y: [100, 100 - candlesticks[i].open, 100 - candlesticks[i].close],
+        transition: { duration: 1, ease: "easeInOut" }
+      }))
+    }
+  }, [showCandlesticks, candlesticks, controls])
 
   return (
     <svg
       viewBox="0 0 100 100"
       className="w-full h-full"
       preserveAspectRatio="none"
+      aria-hidden="true"
     >
       <defs>
         <radialGradient id="particleGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
@@ -99,7 +106,6 @@ function AnimeTradeVisualization() {
         </filter>
       </defs>
 
-      {/* Particles */}
       {particles.map((particle, index) => (
         <motion.circle
           key={index}
@@ -108,6 +114,7 @@ function AnimeTradeVisualization() {
           r="0.3"
           fill="url(#particleGradient)"
           filter="url(#glow)"
+          initial={{ opacity: 0 }}
           animate={{
             scale: [1, 1.5, 1],
             opacity: [0.7, 1, 0.7],
@@ -116,12 +123,12 @@ function AnimeTradeVisualization() {
             duration: 3 + Math.random(),
             repeat: Infinity,
             ease: "easeInOut",
+            delay: Math.random() * 2,
           }}
         />
       ))}
 
-      {/* Candlesticks */}
-      {candlesticks.map((candle, index) => (
+      {showCandlesticks && candlesticks.map((candle, index) => (
         <motion.rect
           key={candle.id}
           x={index * 50 + 22}
@@ -130,6 +137,7 @@ function AnimeTradeVisualization() {
           fill="#4EC9B0"
           opacity="0.3"
           custom={index}
+          initial={{ scaleY: 0, y: 100 }}
           animate={controls}
           style={{ originY: "100%" }}
         />
@@ -160,9 +168,9 @@ function JapaneseInspiredElement() {
       className="inline-block ml-2 sm:ml-4"
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 2, delay: 1.5 }}
+      transition={{ duration: 2, delay: 0.7 }}
     >
-      <svg width="0.8em" height="0.8em" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="0.8em" height="0.8em" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <filter id="sakuraGlow">
             <feGaussianBlur stdDeviation="1" result="coloredBlur" />
@@ -173,7 +181,6 @@ function JapaneseInspiredElement() {
           </filter>
         </defs>
         
-        {/* Stylized Cherry Blossom (Sakura) */}
         <g filter="url(#sakuraGlow)">
           <path d="M30 5L35 20L50 25L35 30L30 45L25 30L10 25L25 20L30 5Z" stroke="white" strokeWidth="2" fill="none" />
           <circle cx="30" cy="25" r="5" fill="white" opacity="0.6" />
