@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,12 +28,95 @@ export default function Navbar() {
             >
               Docs
             </Link>
-            <button
-              className="bg-white text-black font-bold py-2 px-6 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button"
-              onClick={() => console.log('Connect clicked')}
-            >
-              Connect
-            </button>
+            <ConnectButton.Custom>
+              {({
+                account,
+                chain,
+                openAccountModal,
+                openChainModal,
+                openConnectModal,
+                authenticationStatus,
+                mounted,
+              }) => {
+                const ready = mounted && authenticationStatus !== 'loading'
+                const connected =
+                  ready &&
+                  account &&
+                  chain &&
+                  (!authenticationStatus || authenticationStatus === 'authenticated')
+
+                return (
+                  <div
+                    {...(!ready && {
+                      'aria-hidden': true,
+                      'style': {
+                        opacity: 0,
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                      },
+                    })}
+                  >
+                    {(() => {
+                      if (!connected) {
+                        return (
+                          <button onClick={openConnectModal} type="button" className="bg-white text-black font-bold py-2 px-6 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button">
+                            Connect
+                          </button>
+                        )
+                      }
+
+                      if (chain.unsupported) {
+                        return (
+                          <button onClick={openChainModal} type="button" className="bg-white text-black font-bold py-2 px-6 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button">
+                            Wrong network
+                          </button>
+                        )
+                      }
+
+                      return (
+                        <div style={{ display: 'flex', gap: 12 }}>
+                          <button
+                            onClick={openChainModal}
+                            style={{ display: 'flex', alignItems: 'center' }}
+                            type="button"
+                            className="bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button"
+                          >
+                            {chain.hasIcon && (
+                              <div
+                                style={{
+                                  background: chain.iconBackground,
+                                  width: 12,
+                                  height: 12,
+                                  borderRadius: 999,
+                                  overflow: 'hidden',
+                                  marginRight: 4,
+                                }}
+                              >
+                                {chain.iconUrl && (
+                                  <img
+                                    alt={chain.name ?? 'Chain icon'}
+                                    src={chain.iconUrl}
+                                    style={{ width: 12, height: 12 }}
+                                  />
+                                )}
+                              </div>
+                            )}
+                            {chain.name}
+                          </button>
+
+                          <button onClick={openAccountModal} type="button" className="bg-white text-black font-bold py-2 px-4 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button">
+                            {account.displayName}
+                            {account.displayBalance
+                              ? ` (${account.displayBalance})`
+                              : ''}
+                          </button>
+                        </div>
+                      )
+                    })()}
+                  </div>
+                )
+              }}
+            </ConnectButton.Custom>
           </div>
           <div className="flex sm:hidden">
             <button
@@ -76,15 +160,95 @@ export default function Navbar() {
               >
                 Docs
               </Link>
-              <button
-                className="bg-white text-black font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button text-xl"
-                onClick={() => {
-                  console.log('Connect clicked')
-                  toggleMenu()
+              <ConnectButton.Custom>
+                {({
+                  account,
+                  chain,
+                  openAccountModal,
+                  openChainModal,
+                  openConnectModal,
+                  authenticationStatus,
+                  mounted,
+                }) => {
+                  const ready = mounted && authenticationStatus !== 'loading'
+                  const connected =
+                    ready &&
+                    account &&
+                    chain &&
+                    (!authenticationStatus || authenticationStatus === 'authenticated')
+
+                  return (
+                    <div
+                      {...(!ready && {
+                        'aria-hidden': true,
+                        'style': {
+                          opacity: 0,
+                          pointerEvents: 'none',
+                          userSelect: 'none',
+                        },
+                      })}
+                    >
+                      {(() => {
+                        if (!connected) {
+                          return (
+                            <button onClick={openConnectModal} type="button" className="bg-white text-black font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button text-xl">
+                              Connect
+                            </button>
+                          )
+                        }
+
+                        if (chain.unsupported) {
+                          return (
+                            <button onClick={openChainModal} type="button" className="bg-white text-black font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button text-xl">
+                              Wrong network
+                            </button>
+                          )
+                        }
+
+                        return (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                            <button
+                              onClick={openChainModal}
+                              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                              type="button"
+                              className="bg-white text-black font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button text-xl"
+                            >
+                              {chain.hasIcon && (
+                                <div
+                                  style={{
+                                    background: chain.iconBackground,
+                                    width: 24,
+                                    height: 24,
+                                    borderRadius: 999,
+                                    overflow: 'hidden',
+                                    marginRight: 8,
+                                  }}
+                                >
+                                  {chain.iconUrl && (
+                                    <img
+                                      alt={chain.name ?? 'Chain icon'}
+                                      src={chain.iconUrl}
+                                      style={{ width: 24, height: 24 }}
+                                    />
+                                  )}
+                                </div>
+                              )}
+                              {chain.name}
+                            </button>
+
+                            <button onClick={openAccountModal} type="button" className="bg-white text-black font-bold py-3 px-8 rounded-md hover:bg-opacity-90 transition duration-300 ease-in-out connect-button text-xl">
+                              {account.displayName}
+                              {account.displayBalance
+                                ? ` (${account.displayBalance})`
+                                : ''}
+                            </button>
+                          </div>
+                        )
+                      })()}
+                    </div>
+                  )
                 }}
-              >
-                Connect
-              </button>
+              </ConnectButton.Custom>
             </div>
           </motion.div>
         )}
