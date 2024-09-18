@@ -2,7 +2,6 @@
 
 import { motion, useAnimation } from 'framer-motion'
 import { useState, useEffect, useCallback } from 'react'
-
 export default function OoLongHero() {
   const [showCandlesticks, setShowCandlesticks] = useState(false)
 
