@@ -49,7 +49,7 @@ export default function LeverageTrade() {
       <div className="w-full max-w-sm bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-3xl p-5 shadow-xl border border-gray-700">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-white">Leverage Trade</h2>
-          <Button variant="ghost" size="sm" className="text-white hover:bg-gray-800">
+          <Button variant="outline" size="sm" className="text-white hover:bg-gray-800">
             <Settings className="h-5 w-5" />
           </Button>
         </div>
