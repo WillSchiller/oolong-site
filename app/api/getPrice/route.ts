@@ -17,6 +17,7 @@ const poolManagerABI: string[] = [
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const poolId = searchParams.get('poolId');
+  console.log('Pool ID:', poolId);
 
 
   if (!process.env.RPC_URL) {
