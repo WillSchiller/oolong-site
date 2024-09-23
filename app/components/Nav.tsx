@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import Image  from 'next/image'
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -93,7 +95,7 @@ export default function Navbar() {
                                 }}
                               >
                                 {chain.iconUrl && (
-                                  <img
+                                  <Image
                                     alt={chain.name ?? 'Chain icon'}
                                     src={chain.iconUrl}
                                     style={{ width: 12, height: 12 }}
@@ -225,7 +227,7 @@ export default function Navbar() {
                                   }}
                                 >
                                   {chain.iconUrl && (
-                                    <img
+                                    <Image
                                       alt={chain.name ?? 'Chain icon'}
                                       src={chain.iconUrl}
                                       style={{ width: 24, height: 24 }}
