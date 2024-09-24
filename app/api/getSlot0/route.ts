@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createPublicClient, http, Address, PublicClient } from 'viem';
 import { baseSepolia } from 'viem/chains';
 
-const STATE_VIEWER = '0x4cd8D683f8301EaF268c3B66578ea2ceA0DCEe96' as Address;
+const STATE_VIEW = '0xFB3e0C6F74eB1a21CC1Da29aeC80D2Dfe6C9a317' as Address;
 
 const StateViewABI = [
     {
@@ -56,13 +56,13 @@ export async function GET(request: NextRequest) {
 
         const [slot0, liquidity] = await Promise.all([
             client.readContract({
-                address: STATE_VIEWER,
+                address: STATE_VIEW,
                 abi: StateViewABI,
                 functionName: 'getSlot0',
                 args: [poolId as `0x${string}`],
             }),
             client.readContract({
-                address: STATE_VIEWER,
+                address: STATE_VIEW,
                 abi: StateViewABI,
                 functionName: 'getLiquidity',
                 args: [poolId as `0x${string}`],
