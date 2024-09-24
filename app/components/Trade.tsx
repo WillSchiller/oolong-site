@@ -189,7 +189,13 @@ export default function LeverageTrade() {
        token.symbol.toLowerCase().includes(searchQuery.toLowerCase()))
   )
 
-  const TokenSelector = ({ isFrom, selectedToken, onSelect }) => (
+  interface TokenSelectorProps {
+    isFrom: boolean;
+    selectedToken: typeof tokens[0] | null;
+    onSelect: (token: typeof tokens[0], isFrom: boolean) => void;
+  }
+
+  const TokenSelector = ({ isFrom, selectedToken, onSelect }: TokenSelectorProps) => (
     <div>
       <Button
         onClick={(event) => isFrom ? setFromAnchorEl(event.currentTarget) : setToAnchorEl(event.currentTarget)}
@@ -327,7 +333,7 @@ export default function LeverageTrade() {
                 <TextField
                   type="number"
                   value={toAmount}
-                  readOnly
+                  inputProps={{ readOnly: true }}
                   placeholder="0.0"
                   fullWidth
                   variant="standard"
