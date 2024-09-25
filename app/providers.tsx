@@ -11,11 +11,7 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  base,
+  baseSepolia,
 } from 'wagmi/chains';
 import {
   QueryClientProvider,
@@ -26,7 +22,7 @@ import {
 const config = getDefaultConfig({
   appName: 'oolong.xyz',
   projectId: '23914b3953c2c1d7776e427fe8300679',
-  chains: [mainnet, polygon, optimism, arbitrum, base],
+  chains: [baseSepolia],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
 
